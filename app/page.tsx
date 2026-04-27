@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
-import StatsBar from "./components/StatsBar";
+import StatsBar from "./components/Statsbar";
 import About from "./components/About";
 import ServicesGrid from "./components/ServicesGrid";
 import Universities from "./components/Universities";
