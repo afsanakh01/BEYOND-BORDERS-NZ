@@ -1,24 +1,32 @@
-import HeroScroll from "./components/Hero/HeroScroll";
-import Navbar from "./components/UI/Navbar";
-import StatsBar from "./components/Sections/StatsBar";
-import ServicesGrid from "./components/Sections/ServicesGrid";
-import Process from "./components/Sections/Process";
-import FeaturedUni from "./components/Sections/FeaturedUni";
-import TestimonialSection from "./components/Sections/TestimonialSection";
-import ContactForm from "./components/Sections/ContactForm";
-import Footer from "./components/UI/Footer";
+"use client";
+import dynamic from "next/dynamic";
+import Navbar from "./components/Navbar";
+import StatsBar from "./components/StatsBar";
+import About from "./components/About";
+import ServicesGrid from "./components/ServicesGrid";
+import Universities from "./components/Universities";
+import Process from "./components/Process";
+import Testimonials from "./components/Testimonials";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+
+const HeroScroll = dynamic(
+  () => import("./components/HeroScroll"),
+  { ssr: false }
+);
 
 export default function Home() {
   return (
-    <main className="relative bg-navy overflow-hidden">
+    <main style={{ background: "#0D1B2A" }}>
       <Navbar />
       <HeroScroll />
       <StatsBar />
+      <About />
       <ServicesGrid />
+      <Universities />
       <Process />
-      <FeaturedUni />
-      <TestimonialSection />
-      <ContactForm />
+      <Testimonials />
+      <Contact />
       <Footer />
     </main>
   );
