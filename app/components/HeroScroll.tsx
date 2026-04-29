@@ -4,11 +4,40 @@ import { useEffect, useRef, useState } from "react";
 const TOTAL = 300;
 
 const overlays = [
-  { eyebrow: "New Zealand's Premier Education Consultancy", headline: "The World Is", italic: "Waiting For You", sub: "Your journey to world-class universities starts beyond these borders", btn: false },
-  { eyebrow: "University of Otago · Auckland · Victoria · Canterbury", headline: "New Zealand's", italic: "Finest Universities", sub: "Step inside world-class campuses built for ambitious minds", btn: false },
-  { eyebrow: "What are you waiting for?", headline: "You Deserve", italic: "World-Class Education", sub: "500+ students placed. 98% visa success. Life-changing outcomes.", btn: false },
-  { eyebrow: "500+ Students Placed · 98% Visa Success Rate", headline: "Your Future", italic: "Starts Here", sub: "Expert counselling. Proven results. Beyond Borders. Beyond Limits.", btn: true },
+  {
+    eyebrow: "NEW ZEALAND'S PREMIER EDUCATION CONSULTANCY",
+    headline: "BEYOND\nBORDERS",
+    sub: "",
+    btn: false,
+    position: "center",
+    size: "massive",
+  },
+  {
+    eyebrow: "",
+    headline: "We have\nscholarship\nplans.",
+    sub: "",
+    btn: false,
+    position: "left",
+    size: "large",
+  },
+  {
+    eyebrow: "",
+    headline: "YOU\nDESERVE\nIT",
+    sub: "",
+    btn: false,
+    position: "center",
+    size: "massive",
+  },
+  {
+    eyebrow: "500+ STUDENTS PLACED · 98% VISA SUCCESS",
+    headline: "Your Future\nStarts Here",
+    sub: "Expert counselling. Proven results.",
+    btn: true,
+    position: "bottom-left",
+    size: "large",
+  },
 ];
+
 
 export default function HeroScroll() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -97,7 +126,7 @@ export default function HeroScroll() {
         </div>
       )}
 
-      <div id="hero" style={{ position: "relative", height: "600vh" }}>
+      <div id="hero" style={{ position: "relative", height: "1200vh" }}>
         <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
           <div style={{
             position: "absolute", inset: 0,
@@ -113,14 +142,108 @@ export default function HeroScroll() {
           }} />
 
           {overlays.map((o, i) => (
-            <div key={i} style={{
-              position: "absolute", inset: 0,
-              display: "flex", flexDirection: "column",
-              alignItems: "center", justifyContent: "center",
-              textAlign: "center", padding: "2rem",
-              opacity: active === i ? 1 : 0,
-              transition: "opacity 0.9s ease",
-              pointerEvents: active === i ? "all" : "none",
+  <div key={i} style={{
+    position: "absolute", inset: 0,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: o.position === "center" ? "center" : o.position === "left" || o.position === "bottom-left" ? "flex-start" : "center",
+    justifyContent: o.position === "bottom-left" ? "flex-end" : "center",
+    textAlign: o.position === "center" ? "center" : "left",
+    padding: o.position === "bottom-left" || o.position === "left" ? "4rem 5rem" : "2rem",
+    paddingBottom: o.position === "bottom-left" ? "6rem" : undefined,
+    opacity: active === i ? 1 : 0,
+    transition: "opacity 0.9s ease",
+    pointerEvents: active === i ? "all" : "none",
+  }}>
+    {o.eyebrow && (
+      <p style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: "0.65rem", letterSpacing: "0.35em",
+        textTransform: "uppercase", color: "rgba(250,250,248,0.7)",
+        marginBottom: "1.5rem",
+      }}>{o.eyebrow}</p>
+    )}
+
+    <h1 style={{
+      fontFamily: "'Playfair Display', serif",
+      fontSize: o.size === "massive" ? "clamp(5rem,12vw,13rem)" : "clamp(3rem,7vw,8rem)",
+      fontWeight: 900,
+      lineHeight: 0.95,
+      color: "#FAFAF8",
+      whiteSpace: "pre-line",
+      letterSpacing: o.size === "massive" ? "-0.02em" : "0",
+    }}>{o.headline}</h1>
+
+    {o.sub && (
+      <p style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: "1rem", fontWeight: 300,
+        color: "rgba(250,250,248,0.7)",
+        marginTop: "1.5rem", maxWidth: 400,
+        lineHeight: 1.7,
+      }}>{o.sub}</p>
+    )}
+
+    {overlays.map((o, i) => (
+  <div key={i} style={{
+    position: "absolute", inset: 0,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: o.position === "center" ? "center" : o.position === "left" || o.position === "bottom-left" ? "flex-start" : "center",
+    justifyContent: o.position === "bottom-left" ? "flex-end" : "center",
+    textAlign: o.position === "center" ? "center" : "left",
+    padding: o.position === "bottom-left" || o.position === "left" ? "4rem 5rem" : "2rem",
+    paddingBottom: o.position === "bottom-left" ? "6rem" : undefined,
+    opacity: active === i ? 1 : 0,
+    transition: "opacity 0.9s ease",
+    pointerEvents: active === i ? "all" : "none",
+  }}>
+    {o.eyebrow && (
+      <p style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: "0.65rem", letterSpacing: "0.35em",
+        textTransform: "uppercase", color: "rgba(250,250,248,0.7)",
+        marginBottom: "1.5rem",
+      }}>{o.eyebrow}</p>
+    )}
+
+    <h1 style={{
+      fontFamily: "'Playfair Display', serif",
+      fontSize: o.size === "massive" ? "clamp(5rem,12vw,13rem)" : "clamp(3rem,7vw,8rem)",
+      fontWeight: 900,
+      lineHeight: 0.95,
+      color: "#FAFAF8",
+      whiteSpace: "pre-line",
+      letterSpacing: o.size === "massive" ? "-0.02em" : "0",
+    }}>{o.headline}</h1>
+
+    {o.sub && (
+      <p style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: "1rem", fontWeight: 300,
+        color: "rgba(250,250,248,0.7)",
+        marginTop: "1.5rem", maxWidth: 400,
+        lineHeight: 1.7,
+      }}>{o.sub}</p>
+    )}
+
+    {o.btn && (
+      <a href="#contact" style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: "0.72rem", letterSpacing: "0.2em",
+        textTransform: "uppercase", color: "#0c0c0c",
+        background: "#FAFAF8",
+        padding: "1rem 2.5rem",
+        borderRadius: "2rem",
+        textDecoration: "none",
+        marginTop: "2rem",
+        display: "inline-block",
+      }}>Contact Us</a>
+    )}
+  </div>
+))}
+  </div>
+))}
             }}>
               <p style={{
                 fontFamily: "'Space Mono',monospace",

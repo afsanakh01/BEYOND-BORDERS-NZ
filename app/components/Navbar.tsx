@@ -11,56 +11,72 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav style={{
-      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: scrolled ? "1.2rem 4rem" : "2rem 4rem",
-      background: scrolled ? "rgba(13,27,42,0.96)" : "transparent",
-      backdropFilter: scrolled ? "blur(20px)" : "none",
-      borderBottom: scrolled ? "1px solid rgba(200,169,110,0.15)" : "none",
-      transition: "all 0.6s ease",
-    }}>
-      <a href="#" style={{
-        fontFamily: "'Cormorant Garamond', serif",
-        fontSize: "1.3rem", fontWeight: 300,
-        letterSpacing: "0.15em", color: "#FAFAF8",
-        textDecoration: "none",
+    <>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+      <nav style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: scrolled ? "1rem 3rem" : "1.5rem 3rem",
+        background: scrolled ? "rgba(12,12,12,0.95)" : "transparent",
+        backdropFilter: scrolled ? "blur(20px)" : "none",
+        transition: "all 0.5s ease",
       }}>
-        Beyond <span style={{ color: "#C8A96E", fontStyle: "italic" }}>Borders</span> NZ
-      </a>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{
+            width: "2.2rem", height: "2.2rem",
+            borderRadius: "50%",
+            border: "2px solid #FAFAF8",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "0.9rem", fontWeight: 700,
+            color: "#FAFAF8",
+          }}>B</div>
+          <span style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "1rem", fontWeight: 700,
+            letterSpacing: "0.15em", color: "#FAFAF8",
+            textTransform: "uppercase",
+          }}>Beyond Borders NZ</span>
+        </div>
 
-      <ul style={{ display: "flex", gap: "2.5rem", listStyle: "none" }}>
-        {["About", "Services", "Universities", "Process", "Contact"].map(link => (
-          <li key={link}>
-            <a href={`#${link.toLowerCase()}`} style={{
-              fontSize: "0.72rem", fontWeight: 400,
-              letterSpacing: "0.2em", textTransform: "uppercase",
-              color: "rgba(250,250,248,0.6)", textDecoration: "none",
-              transition: "color 0.3s",
-            }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#FAFAF8")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(250,250,248,0.6)")}
-            >{link}</a>
-          </li>
-        ))}
-      </ul>
+        <ul style={{ display: "flex", gap: "2.5rem", listStyle: "none" }}>
+          {["Home", "About", "Services", "Universities", "Contact"].map(link => (
+            <li key={link}>
+              <a href={`#${link.toLowerCase()}`} style={{
+                fontSize: "0.72rem", fontWeight: 400,
+                letterSpacing: "0.15em", textTransform: "uppercase",
+                color: "rgba(250,250,248,0.75)", textDecoration: "none",
+                transition: "color 0.3s",
+                fontFamily: "'Inter', sans-serif",
+              }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#FAFAF8")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(250,250,248,0.75)")}
+              >{link}</a>
+            </li>
+          ))}
+        </ul>
 
-      <a href="#contact" style={{
-        fontSize: "0.72rem", fontWeight: 500,
-        letterSpacing: "0.2em", textTransform: "uppercase",
-        color: "#0D1B2A", background: "#C8A96E",
-        padding: "0.75rem 1.8rem", textDecoration: "none",
-        border: "1px solid #C8A96E", transition: "all 0.3s",
-      }}
-        onMouseEnter={e => {
-          e.currentTarget.style.background = "transparent";
-          e.currentTarget.style.color = "#C8A96E";
+        <a href="#contact" style={{
+          fontSize: "0.72rem", fontWeight: 500,
+          letterSpacing: "0.15em", textTransform: "uppercase",
+          color: "#0c0c0c", background: "#FAFAF8",
+          padding: "0.7rem 1.8rem",
+          borderRadius: "2rem",
+          textDecoration: "none",
+          fontFamily: "'Inter', sans-serif",
+          transition: "all 0.3s",
+          border: "1px solid #FAFAF8",
         }}
-        onMouseLeave={e => {
-          e.currentTarget.style.background = "#C8A96E";
-          e.currentTarget.style.color = "#0D1B2A";
-        }}
-      >Free Consultation</a>
-    </nav>
+          onMouseEnter={e => {
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.color = "#FAFAF8";
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = "#FAFAF8";
+            e.currentTarget.style.color = "#0c0c0c";
+          }}
+        >Consult Now</a>
+      </nav>
+    </>
   );
 }
