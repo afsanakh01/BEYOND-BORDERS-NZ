@@ -43,12 +43,16 @@ export default function Universities() {
         lineHeight: 1.1, color: "#FAFAF8", marginBottom: "4rem",
       }}>Handpicked Institutions<br /><em>For Your Future</em></h2>
       <div style={{
-        display: "grid", gridTemplateColumns: "repeat(3,1fr)",
-        gap: "1.5px", background: "rgba(250,250,248,0.08)",
+  display: "grid",
+  gridTemplateColumns: "repeat(3,1fr)",
+  gap: "1.5px",
+  background: "rgba(250,250,248,0.08)",
+  minHeight: "500px",
+}}>
       }}>
         {unis.map((u, i) => (
           <div key={i} style={{
-            position: "relative", aspectRatio: "3/4",
+            position: "relative", height: "500px",
             overflow: "hidden", cursor: "pointer",
           }}
             onMouseEnter={e => {

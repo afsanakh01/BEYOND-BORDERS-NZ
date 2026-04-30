@@ -6,16 +6,16 @@ const TOTAL = 300;
 const overlays = [
   {
     eyebrow: "NEW ZEALAND'S PREMIER EDUCATION CONSULTANCY",
-    headline: "BEYOND\nBORDERS",
+    headline: "Your Future\nBeyond\nBorders",
     sub: "",
     btn: false,
-    align: "center",
-    valign: "center",
-    size: "massive",
+    align: "left",
+    valign: "bottom",
+    size: "large",
   },
   {
     eyebrow: "",
-    headline: "We have\nscholarship\nplans.",
+    headline: "98% Visa\nSuccess\nRate.",
     sub: "",
     btn: false,
     align: "left",
@@ -29,7 +29,7 @@ const overlays = [
     btn: false,
     align: "center",
     valign: "center",
-    size: "massive",
+    size: "large",
   },
   {
     eyebrow: "500+ STUDENTS PLACED · 98% VISA SUCCESS",
@@ -38,7 +38,7 @@ const overlays = [
     btn: true,
     align: "left",
     valign: "bottom",
-    size: "medium",
+    size: "large",
   },
 ];
 
