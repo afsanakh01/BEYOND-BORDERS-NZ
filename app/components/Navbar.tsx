@@ -34,7 +34,7 @@ export default function Navbar() {
           <span style={{
             fontFamily: "'Playfair Display', serif",
             fontSize: "1rem", fontWeight: 700,
-            letterSpacing: "0.15em", color: "#FAFAF8",
+            letterSpacing: "0.12em", color: "#FAFAF8",
             textTransform: "uppercase",
           }}>Beyond Borders NZ</span>
         </div>

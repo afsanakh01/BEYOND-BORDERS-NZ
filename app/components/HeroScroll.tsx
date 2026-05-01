@@ -15,7 +15,7 @@ const overlays = [
   },
   {
     eyebrow: "",
-    headline: "98% Visa\nSuccess\nRate.",
+    headline: "500+ Students\nPlaced\nWorldwide.",
     sub: "",
     btn: false,
     align: "left",
