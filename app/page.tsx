@@ -17,7 +17,7 @@ const HeroScroll = dynamic(
 
 export default function Home() {
   return (
-    <main style={{ background: "#0D1B2A" }}>
+    <main style={{ background: "#0c0c0c" }}>
       <Navbar />
       <HeroScroll />
       <StatsBar />

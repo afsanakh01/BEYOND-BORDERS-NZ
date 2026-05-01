@@ -7,7 +7,7 @@ const services = [
 
 export default function ServicesGrid() {
   return (
-    <section id="services" style={{ background: "#0D1B2A", padding: "8rem 4rem" }}>
+    <section id="services" style={{ background: "#0c0c0c", padding: "8rem 4rem" }}>
       <p style={{
         fontFamily: "'Inter', sans-serif", fontSize: "0.62rem",
         letterSpacing: "0.4em", textTransform: "uppercase",
@@ -24,16 +24,16 @@ export default function ServicesGrid() {
       }}>
         {services.map((s, i) => (
           <div key={i} style={{
-            background: "#0D1B2A", padding: "3rem 2.5rem",
+            background: "#0c0c0c", padding: "3rem 2.5rem",
             transition: "background 0.4s", cursor: "default",
             borderBottom: "2px solid transparent",
           }}
             onMouseEnter={e => {
-              (e.currentTarget as HTMLDivElement).style.background = "#162436";
+              (e.currentTarget as HTMLDivElement).style.background = "#161616";
               (e.currentTarget as HTMLDivElement).style.borderBottom = "2px solid #C8A96E";
             }}
             onMouseLeave={e => {
-              (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A";
+              (e.currentTarget as HTMLDivElement).style.background = "#0c0c0c";
               (e.currentTarget as HTMLDivElement).style.borderBottom = "2px solid transparent";
             }}
           >

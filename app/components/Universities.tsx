@@ -25,7 +25,7 @@ const unis = [
 
 export default function Universities() {
   return (
-    <section id="universities" style={{ background: "#0D1B2A", padding: "8rem 4rem" }}>
+    <section id="universities" style={{ background: "#0c0c0c", padding: "8rem 4rem" }}>
       <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#C8A96E", marginBottom: "1rem" }}>Featured Universities</p>
       <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.5rem,4vw,4rem)", fontWeight: 300, lineHeight: 1.1, color: "#FAFAF8", marginBottom: "4rem" }}>
         Handpicked Institutions<br /><em style={{ color: "#C8A96E" }}>For Your Future</em>
@@ -41,7 +41,7 @@ export default function Universities() {
               const btn = e.currentTarget.querySelector(".ubtn") as HTMLElement;
               if (bg) bg.style.transform = "scale(1.06)";
               if (desc) { desc.style.opacity = "1"; desc.style.transform = "translateY(0)"; }
-              if (btn) { btn.style.background = "#C8A96E"; btn.style.color = "#0D1B2A"; }
+              if (btn) { btn.style.background = "#C8A96E"; btn.style.color = "#0c0c0c"; }
             }}
             onMouseLeave={e => {
               const bg = e.currentTarget.querySelector(".ubg") as HTMLElement;

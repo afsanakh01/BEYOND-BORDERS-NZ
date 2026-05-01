@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        navy: "#0D1B2A",
+        navy: "#0c0c0c",
         navyMid: "#1A3A5C",
         gold: "#C8A96E",
         offWhite: "#FAFAF8",

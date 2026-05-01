@@ -178,12 +178,8 @@ export default function HeroScroll() {
 
               <h1 style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: o.size === "massive"
-                  ? "clamp(5rem,11vw,12rem)"
-                  : o.size === "large"
-                  ? "clamp(3.5rem,8vw,9rem)"
-                  : "clamp(2.5rem,5vw,6rem)",
-                fontWeight: 900,
+                fontSize: "clamp(2.5rem,5vw,6rem)",
+                fontWeight: 400,
                 lineHeight: 0.92,
                 color: "#FAFAF8",
                 whiteSpace: "pre-line",

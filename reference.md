@@ -20,7 +20,7 @@ Tech Stack:
 1. DESIGN & AESTHETIC SYSTEM
 
 Theme: "Oxford meets New Zealand" — dark prestigious academia.
-Default: Dark mode (#0D1B2A deep navy).
+Default: Dark mode (#0c0c0c deep navy).
 
 Typography:
 - Headlines: Cormorant Garamond (Serif)
@@ -28,7 +28,7 @@ Typography:
 - Tags: Space Mono
 
 Colors:
-- Background: #0D1B2A (Deep Navy)
+- Background: #0c0c0c (Deep Navy)
 - Primary Accent: #C8A96E (Prestige Gold)
 - Secondary: #FAFAF8 (Off White)
 - Mid Navy: #1A3A5C
@@ -272,7 +272,7 @@ ContactForm.tsx:
 10. FOOTER
 
 Footer.tsx:
-- Background: #0D1B2A deep navy
+- Background: #0c0c0c deep navy
 - Border top: gold/20
 - Logo: "Beyond Borders NZ" Cormorant Garamond
   "Borders" in gold italic
