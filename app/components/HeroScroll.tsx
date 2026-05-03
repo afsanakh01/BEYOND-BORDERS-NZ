@@ -49,19 +49,6 @@ export default function HeroScroll() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    let count = 0;
-    for (let i = 1; i <= TOTAL; i++) {
-      const img = new window.Image();
-      img.src = `/sequence-1/ezgif-frame-${String(i).padStart(3, "0")}.jpg`;
-      img.onload = img.onerror = () => {
-        count++;
-        setLoaded(count);
-      };
-      imgsRef.current[i] = img;
-    }
-  }, []);
-
-  useEffect(() => {
   let count = 0;
 
   const loadImg = (i: number) => {
@@ -72,6 +59,14 @@ export default function HeroScroll() {
       setLoaded(count);
     };
     imgsRef.current[i] = img;
+  };
+
+  for (let i = 1; i <= 50; i++) loadImg(i);
+
+  setTimeout(() => {
+    for (let i = 51; i <= TOTAL; i++) loadImg(i);
+  }, 2000);
+}, []);
   };
 
   // Load first 50 immediately
