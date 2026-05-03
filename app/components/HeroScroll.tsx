@@ -62,20 +62,26 @@ export default function HeroScroll() {
   }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+  let count = 0;
 
-    const draw = (img: HTMLImageElement) => {
-      const ctx = canvas.getContext("2d");
-      if (!ctx || !img.naturalWidth) return;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const r = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
-      const cx = (canvas.width - img.naturalWidth * r) / 2;
-      const cy = (canvas.height - img.naturalHeight * r) / 2;
-      ctx.filter = "contrast(1.06) saturate(1.12) brightness(0.88)";
-      ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, cx, cy, img.naturalWidth * r, img.naturalHeight * r);
-      ctx.filter = "none";
+  const loadImg = (i: number) => {
+    const img = new window.Image();
+    img.src = `/sequence-1/ezgif-frame-${String(i).padStart(3, "0")}.jpg`;
+    img.onload = img.onerror = () => {
+      count++;
+      setLoaded(count);
+    };
+    imgsRef.current[i] = img;
+  };
+
+  // Load first 50 immediately
+  for (let i = 1; i <= 50; i++) loadImg(i);
+
+  // Load rest after 2 seconds
+  setTimeout(() => {
+    for (let i = 51; i <= TOTAL; i++) loadImg(i);
+  }, 2000);
+
     };
 
     const onScroll = () => {
