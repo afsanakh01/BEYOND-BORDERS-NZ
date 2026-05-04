@@ -24,7 +24,7 @@ export default function Footer() {
         {[
           { title: "Services", items: ["University Placement", "Visa Consultation", "English Prep"] },
           { title: "Universities", items: ["University of Otago", "University of Auckland", "AIS St Helens", "American College Cyprus"] },
-          { title: "Contact", items: ["Auckland, New Zealand", "hello@beyondbordersnz.co.nz", "+64-0223884470 (New Zealand)", "Mon–Fri 9am–6pm NZST"] },
+          { title: "Contact", items: ["Auckland, New Zealand", "info@beyondbordersnz.co.nz", "+64-0223884470 (New Zealand)", "Mon–Fri 9am–6pm NZST"] },
         ].map((col, i) => (
           <div key={i}>
             <h5 style={{
