@@ -33,7 +33,7 @@ export default function Contact() {
           border: "1px solid #0c0c0c",
           transition: "all 0.3s",
         }}>Book Free Consultation</a>
-        <a href="tel:+6491234567" style={{
+        <a href="tel:+91-7210318786" style={{
           display: "inline-block", fontSize: "0.72rem",
           fontWeight: 500, letterSpacing: "0.2em",
           textTransform: "uppercase", color: "#0c0c0c",

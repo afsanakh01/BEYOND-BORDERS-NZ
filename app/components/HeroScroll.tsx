@@ -5,9 +5,9 @@ const TOTAL = 300;
 
 const overlays = [
   { eyebrow: "NEW ZEALAND'S PREMIER EDUCATION CONSULTANCY", headline: "Your Future\nBeyond\nBorders", sub: "", btn: false, align: "left", valign: "bottom" },
-  { eyebrow: "", headline: "500+ Students\nPlaced\nWorldwide.", sub: "", btn: false, align: "left", valign: "bottom" },
+  { eyebrow: "", headline: "100+ Students\nPlaced\nWorldwide.", sub: "", btn: false, align: "left", valign: "bottom" },
   { eyebrow: "", headline: "You Deserve\nWorld-Class\nEducation", sub: "", btn: false, align: "left", valign: "bottom" },
-  { eyebrow: "500+ STUDENTS PLACED · 98% VISA SUCCESS", headline: "Your Future\nStarts Here", sub: "Expert counselling. Proven results.", btn: true, align: "left", valign: "bottom" },
+  { eyebrow: "100+ STUDENTS PLACED · 98% VISA SUCCESS", headline: "Your Future\nStarts Here", sub: "Expert counselling. Proven results.", btn: true, align: "left", valign: "bottom" },
 ];
 
 export default function HeroScroll() {
