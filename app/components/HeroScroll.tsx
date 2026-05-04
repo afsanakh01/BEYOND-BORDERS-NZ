@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 const TOTAL = 300;
 
 const overlays = [
-  { eyebrow: "NEW ZEALAND'S PREMIER EDUCATION CONSULTANCY", headline: "Your Future\nBeyond\nBorders", sub: "", btn: false, align: "left", valign: "bottom" },
-  { eyebrow: "", headline: "100+ Students\nPlaced\nWorldwide.", sub: "", btn: false, align: "left", valign: "bottom" },
-  { eyebrow: "", headline: "You Deserve\nWorld-Class\nEducation", sub: "", btn: false, align: "left", valign: "bottom" },
-  { eyebrow: "100+ STUDENTS PLACED · 98% VISA SUCCESS", headline: "Your Future\nStarts Here", sub: "Expert counselling. Proven results.", btn: true, align: "left", valign: "bottom" },
+  { eyebrow: "NEW ZEALAND'S PREMIER EDUCATION CONSULTANCY", headline: "Your Future\nBeyond\nBorders", sub: "", btn: false },
+  { eyebrow: "", headline: "100+ Students\nPlaced\nWorldwide.", sub: "", btn: false },
+  { eyebrow: "", headline: "You Deserve\nWorld-Class\nEducation", sub: "", btn: false },
+  { eyebrow: "100+ STUDENTS PLACED · 98% VISA SUCCESS", headline: "Your Future\nStarts Here", sub: "Expert counselling. Proven results.", btn: true },
 ];
 
 export default function HeroScroll() {
@@ -16,6 +16,7 @@ export default function HeroScroll() {
   const [loaded, setLoaded] = useState(0);
   const [active, setActive] = useState(0);
 
+  // ── Image preloading ──────────────────────────────────────────────
   useEffect(() => {
     let count = 0;
     const loadImg = (i: number) => {
@@ -25,41 +26,69 @@ export default function HeroScroll() {
       imgsRef.current[i] = img;
     };
     for (let i = 1; i <= 50; i++) loadImg(i);
-    setTimeout(() => { for (let i = 51; i <= TOTAL; i++) loadImg(i); }, 2000);
+    const timer = setTimeout(() => {
+      for (let i = 51; i <= TOTAL; i++) loadImg(i);
+    }, 2000);
+    return () => clearTimeout(timer);
   }, []);
 
+  // ── Canvas + scroll ───────────────────────────────────────────────
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    const draw = (img: HTMLImageElement) => {
-      const ctx = canvas.getContext("2d");
-      if (!ctx || !img.naturalWidth) return;
+    // Set canvas size ONCE — not on every draw
+    const setSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      const r = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
-      const cx = (canvas.width - img.naturalWidth * r) / 2;
-      const cy = (canvas.height - img.naturalHeight * r) / 2;
-      ctx.filter = "contrast(1.06) saturate(1.12) brightness(0.88)";
+    };
+    setSize();
+
+    const draw = (img: HTMLImageElement) => {
+      if (!img.naturalWidth) return;
+      const cw = canvas.width;
+      const ch = canvas.height;
+      const r = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+      const cx = (cw - img.naturalWidth * r) / 2;
+      const cy = (ch - img.naturalHeight * r) / 2;
+      ctx.clearRect(0, 0, cw, ch);
       ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, cx, cy, img.naturalWidth * r, img.naturalHeight * r);
-      ctx.filter = "none";
+    };
+
+    // RAF throttle — prevents drawing faster than the screen refresh rate
+    let rafId = 0;
+    let pendingFrame = 0;
+
+    const scheduleFrame = (frame: number) => {
+      pendingFrame = frame;
+      if (rafId) return; // already scheduled
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        const img = imgsRef.current[pendingFrame];
+        if (img?.complete && img.naturalWidth) draw(img);
+      });
     };
 
     const onScroll = () => {
       const hero = document.getElementById("hero");
       if (!hero) return;
-      const progress = Math.min(Math.max(window.scrollY / (hero.offsetHeight - window.innerHeight), 0), 1);
+      const scrollable = hero.offsetHeight - window.innerHeight;
+      const progress = Math.min(Math.max(window.scrollY / scrollable, 0), 1);
       const frame = Math.min(Math.max(Math.ceil(progress * TOTAL), 1), TOTAL);
-      const img = imgsRef.current[frame];
-      if (img?.complete && img.naturalWidth) draw(img);
+      scheduleFrame(frame);
       setActive(frame <= 75 ? 0 : frame <= 150 ? 1 : frame <= 225 ? 2 : 3);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", () => {
-      if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", setSize);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", setSize);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const pct = Math.round((loaded / TOTAL) * 100);
@@ -78,7 +107,8 @@ export default function HeroScroll() {
         </div>
       )}
 
-      <div id="hero" style={{ position: "relative", height: "600vh" }}>
+      {/* 1200vh = cinematic scroll pacing for 300 frames */}
+      <div id="hero" style={{ position: "relative", height: "1200vh" }}>
         <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
           <div style={{ position: "absolute", inset: 0, background: "#0c0c0c" }} />
           <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
