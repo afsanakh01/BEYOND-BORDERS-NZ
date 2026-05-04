@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { target: 500, suffix: "+", label: "Students Placed" },
+  { target: 100, suffix: "+", label: "Students Placed" },
   { target: 98, suffix: "%", label: "Visa Success Rate" },
   { target: 40, suffix: "+", label: "Partner Universities" },
   { target: 12, suffix: "+", label: "Countries Served" },
@@ -43,10 +43,10 @@ export default function StatsBar() {
           <div style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: "2.8rem", fontWeight: 600,
-            color: "#0D1B2A", lineHeight: 1,
+            color: "#0c0c0c", lineHeight: 1,
           }}>{counts[i]}{s.suffix}</div>
           <div style={{
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: "0.58rem", letterSpacing: "0.25em",
             textTransform: "uppercase", color: "rgba(13,27,42,0.65)",
             marginTop: "0.3rem",
