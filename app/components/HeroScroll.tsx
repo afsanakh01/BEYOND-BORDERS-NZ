@@ -266,8 +266,7 @@ export default function HeroScroll() {
               )}
               {o.btn && (
                 
-                  href="#contact"
-                  style={{
+                  <a href="#contact" style={{
                     fontFamily: "'Inter', sans-serif",
                     fontSize: "0.72rem",
                     letterSpacing: "0.2em",
