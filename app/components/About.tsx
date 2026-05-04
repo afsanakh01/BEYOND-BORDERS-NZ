@@ -42,7 +42,7 @@ export default function About() {
         }}>
           We believe every student deserves personalised guidance. Beyond Borders. Beyond Limits.
         </p>
-        <a href="#contact" style={{
+        <a href="/team" style={{
           display: "inline-block", fontSize: "0.72rem",
           fontWeight: 500, letterSpacing: "0.2em",
           textTransform: "uppercase", color: "#0c0c0c",
