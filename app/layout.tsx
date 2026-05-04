@@ -1,46 +1,30 @@
-"use client";
-import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
+import type { Metadata } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
+import LenisProvider from "./components/LenisProvider";
 
-const cormorant = Cormorant_Garamond({ 
-  subsets: ["latin"], 
-  weight: ["300", "400", "600", "700"], 
-  variable: "--font-cormorant" 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  variable: "--font-cormorant",
 });
-const outfit = Outfit({ 
-  subsets: ["latin"], 
+const outfit = Outfit({
+  subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-outfit" 
+  variable: "--font-outfit",
 });
+
+export const metadata: Metadata = {
+  title: "Beyond Borders NZ | New Zealand's Premier Education Consultancy",
+  description: "Helping international students get into top New Zealand universities.",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    const lenis = new Lenis({ 
-      duration: 1.5, 
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-    
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
   return (
     <html lang="en" className={`${cormorant.variable} ${outfit.variable} scroll-smooth`}>
-      <head>
-        <title>Beyond Borders NZ | New Zealand's Premier Education Consultancy</title>
-        <meta name="description" content="Helping international students get into top New Zealand universities. Professional visa assistance and university placement." />
-      </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <LenisProvider>{children}</LenisProvider>
+      </body>
     </html>
   );
 }
