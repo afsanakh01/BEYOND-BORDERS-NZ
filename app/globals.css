@@ -10,3 +10,10 @@ body {
   overflow-x: hidden;
   font-family: 'Inter', sans-serif;
 }
+
+@media (max-width: 768px) {
+  nav ul { display: none !important; }
+  nav { padding: 1rem 1.5rem !important; }
+  section { padding: 4rem 1.5rem !important; }
+  .about-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
+}
