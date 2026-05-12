@@ -4,53 +4,35 @@ const services = [
   { icon: "📋", title: "Visa Consultation", desc: "Expert guidance through New Zealand student visa applications with a 98% success rate." },
   { icon: "📖", title: "English Proficiency Prep", desc: "IELTS and PTE coaching with tailored study plans and mock tests to meet university entry requirements." },
 ];
-
 export default function ServicesGrid() {
   return (
-    <section id="services" style={{ background: "#0c0c0c", padding: "8rem 4rem" }}>
-      <p style={{
-        fontFamily: "'Inter', sans-serif", fontSize: "0.62rem",
-        letterSpacing: "0.4em", textTransform: "uppercase",
-        color: "#C8A96E", marginBottom: "1rem",
-      }}>What We Offer</p>
-      <h2 style={{
-        fontFamily: "'Cormorant Garamond', serif",
-        fontSize: "clamp(2.5rem,4vw,4rem)", fontWeight: 300,
-        lineHeight: 1.1, color: "#FAFAF8", marginBottom: "4rem",
-      }}>Everything You Need<br /><em style={{ color: "#C8A96E" }}>to Get There</em></h2>
-      <div style={{
-        display: "grid", gridTemplateColumns: "repeat(3,1fr)",
-        gap: "1px", background: "rgba(200,169,110,0.15)",
-      }}>
-        {services.map((s, i) => (
-          <div key={i} style={{
-            background: "#0c0c0c", padding: "3rem 2.5rem",
-            transition: "background 0.4s", cursor: "default",
-            borderBottom: "2px solid transparent",
-          }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLDivElement).style.background = "#161616";
-              (e.currentTarget as HTMLDivElement).style.borderBottom = "2px solid #C8A96E";
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLDivElement).style.background = "#0c0c0c";
-              (e.currentTarget as HTMLDivElement).style.borderBottom = "2px solid transparent";
-            }}
-          >
-            <span style={{ fontSize: "1.5rem", marginBottom: "1.2rem", display: "block" }}>{s.icon}</span>
-            <h3 style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "1.45rem", fontWeight: 400,
-              color: "#FAFAF8", marginBottom: "0.8rem",
-            }}>{s.title}</h3>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.85rem", fontWeight: 300,
-              color: "rgba(250,250,248,0.6)", lineHeight: 1.8,
-            }}>{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
+    <>
+      <style>{`
+        #services { padding: 5rem 2rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(200,169,110,0.15); }
+        .service-card { background: #0c0c0c; padding: 3rem 2rem; border-bottom: 2px solid transparent; transition: all 0.3s; }
+        .service-card:hover { background: #161616; border-bottom: 2px solid #C8A96E; }
+        @media (max-width: 768px) {
+          #services { padding: 4rem 1.5rem; }
+          .services-grid { grid-template-columns: 1fr; }
+          .service-card { padding: 2.5rem 1.5rem; }
+        }
+      `}</style>
+      <section id="services" style={{ background: "#0c0c0c" }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#C8A96E", marginBottom: "1rem" }}>What We Offer</p>
+        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem,4vw,4rem)", fontWeight: 300, lineHeight: 1.1, color: "#FAFAF8", marginBottom: "3rem" }}>
+          Everything You Need<br /><em style={{ color: "#C8A96E" }}>to Get There</em>
+        </h2>
+        <div className="services-grid">
+          {services.map((s, i) => (
+            <div key={i} className="service-card">
+              <span style={{ fontSize: "1.5rem", marginBottom: "1.2rem", display: "block" }}>{s.icon}</span>
+              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.2rem,2.5vw,1.45rem)", fontWeight: 400, color: "#FAFAF8", marginBottom: "0.8rem" }}>{s.title}</h3>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", fontWeight: 300, color: "rgba(250,250,248,0.6)", lineHeight: 1.8 }}>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
