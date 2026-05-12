@@ -10,12 +10,14 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
       smoothWheel: true,
     });
 
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
+    // Completely stop Lenis while inside the hero — no interference at all
     const onScroll = () => {
       const hero = document.getElementById("hero");
       if (!hero) return;
@@ -27,8 +29,12 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
       }
     };
 
+    // Run immediately on mount to stop Lenis if page loads at top
+    onScroll();
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
       window.removeEventListener("scroll", onScroll);
     };
