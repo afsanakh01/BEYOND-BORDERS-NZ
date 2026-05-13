@@ -1,63 +1,29 @@
 "use client";
+
 const unis = [
-  { tag: "Nicosia, Cyprus 🇨🇾", name: "American College Cyprus", tagline: "Mediterranean Excellence", desc: "A globally recognised American-curriculum college in Cyprus. Business, IT, Law and Hospitality programs.", img: "/cyprus.jpg" },
-  { tag: "Dunedin, New Zealand 🇳🇿", name: "University of Otago", tagline: "New Zealand's Finest", desc: "New Zealand's first university, ranked among the world's best. Medicine, Law, Business, and Science programs.", img: "/otago.jpg" },
-  { tag: "Auckland, New Zealand 🇳🇿", name: "AIS St Helens", tagline: "Business & Hospitality Leadership", desc: "Auckland's leading business and hospitality school. Industry-focused programs preparing graduates for global careers.", img: "/ais.jpg" },
-];
-export default function Universities() {
-  return (
-    <>
-      <style>{`
-        #universities { padding: 5rem 2rem; }
-        .unis-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; background: rgba(200,169,110,0.15); }
-        .uni-card { position: relative; height: 520px; overflow: hidden; cursor: pointer; }
-        @media (max-width: 768px) {
-          #universities { padding: 4rem 1.5rem; }
-          .unis-grid { grid-template-columns: 1fr; gap: 2px; }
-          .uni-card { height: 380px; }
-        }
-        @media (min-width: 769px) and (max-width: 1024px) {
-          .unis-grid { grid-template-columns: 1fr 1fr; }
-        }
-      `}</style>
-      <section id="universities" style={{ background: "#0c0c0c" }}>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#C8A96E", marginBottom: "1rem" }}>Featured Universities</p>
-        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem,4vw,4rem)", fontWeight: 300, lineHeight: 1.1, color: "#FAFAF8", marginBottom: "3rem" }}>
-          Handpicked Institutions<br /><em style={{ color: "#C8A96E" }}>For Your Future</em>
-        </h2>
-        <div className="unis-grid">
-          {unis.map((u, i) => (
-            <div key={i} className="uni-card"
-              onMouseEnter={e => {
-                const bg = e.currentTarget.querySelector(".ubg") as HTMLElement;
-                const desc = e.currentTarget.querySelector(".udesc") as HTMLElement;
-                const btn = e.currentTarget.querySelector(".ubtn") as HTMLElement;
-                if (bg) bg.style.transform = "scale(1.06)";
-                if (desc) { desc.style.opacity = "1"; desc.style.transform = "translateY(0)"; }
-                if (btn) { btn.style.background = "#C8A96E"; btn.style.color = "#0c0c0c"; }
-              }}
-              onMouseLeave={e => {
-                const bg = e.currentTarget.querySelector(".ubg") as HTMLElement;
-                const desc = e.currentTarget.querySelector(".udesc") as HTMLElement;
-                const btn = e.currentTarget.querySelector(".ubtn") as HTMLElement;
-                if (bg) bg.style.transform = "scale(1)";
-                if (desc) { desc.style.opacity = "0"; desc.style.transform = "translateY(12px)"; }
-                if (btn) { btn.style.background = "transparent"; btn.style.color = "#C8A96E"; }
-              }}
-            >
-              <div className="ubg" style={{ position: "absolute", inset: 0, backgroundImage: `url('${u.img}')`, backgroundSize: "cover", backgroundPosition: "center", transition: "transform 0.8s ease" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(13,27,42,0.97) 0%,rgba(13,27,42,0.4) 55%,transparent 100%)" }} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "clamp(1.2rem,3vw,2.2rem)" }}>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#C8A96E", marginBottom: "0.5rem" }}>{u.tag}</p>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.3rem,2.5vw,1.7rem)", fontWeight: 400, color: "#FAFAF8", lineHeight: 1.15, marginBottom: "0.3rem" }}>{u.name}</h3>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic", color: "rgba(200,169,110,0.8)", marginBottom: "0.8rem" }}>{u.tagline}</p>
-                <p className="udesc" style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.78rem", fontWeight: 300, color: "rgba(250,250,248,0.7)", lineHeight: 1.75, marginBottom: "1.2rem", opacity: 0, transform: "translateY(12px)", transition: "all 0.4s ease" }}>{u.desc}</p>
-                <span className="ubtn" style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C8A96E", border: "1px solid rgba(200,169,110,0.4)", padding: "0.6rem 1.3rem", display: "inline-block", transition: "all 0.3s", background: "transparent" }}>Explore Programs →</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
-  );
-}
+  {
+    tag: "Nicosia, Cyprus 🇨🇾",
+    name: "American College Cyprus",
+    tagline: "Mediterranean Excellence",
+    desc: "Founded 1975. Business, IT, Hospitality, Accounting & Tourism programs. Internationally recognised qualifications taught in English.",
+    img: "/cyprus.jpg",
+    programs: [
+      { name: "Business Administration", url: "https://www.ac.ac.cy/academic-programs/" },
+      { name: "Hotel & Hospitality Mgmt", url: "https://www.ac.ac.cy/academic-programs/" },
+      { name: "Computer Science & IT", url: "https://www.ac.ac.cy/academic-programs/" },
+      { name: "Accounting & Finance", url: "https://www.ac.ac.cy/academic-programs/" },
+      { name: "Travel & Tourism Mgmt", url: "https://www.ac.ac.cy/academic-programs/" },
+    ],
+    applyUrl: "https://www.ac.ac.cy/admissions/",
+  },
+  {
+    tag: "Dunedin, New Zealand 🇳🇿",
+    name: "University of Otago",
+    tagline: "New Zealand's Finest",
+    desc: "NZ's first university (est. 1869). Ranked top 1% globally. 200+ programmes across Health Sciences, Commerce, Law, Humanities & Science.",
+    img: "/otago.jpg",
+    programs: [
+      { name: "Medicine & Health Sciences", url: "https://www.otago.ac.nz/healthsciences" },
+      { name: "Commerce & Business", url: "https://www.otago.ac.nz/commerce" },
+      { name: "Law", url: "https://www.otago.ac.nz/law" },
+      { name: "Science"
