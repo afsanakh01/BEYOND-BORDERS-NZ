@@ -11,14 +11,15 @@ const overlays = [
 ];
 
 export default function HeroScroll() {
-  const canvasRef   = useRef<HTMLCanvasElement>(null);
-  const imgsRef     = useRef<HTMLImageElement[]>([]);
-  const loadedRef   = useRef(0);
-  const [pct, setPct]     = useState(0);
-  const [ready, setReady] = useState(false);  // true once frame 1 is painted
+  const canvasRef    = useRef<HTMLCanvasElement>(null);
+  const imgsRef      = useRef<HTMLImageElement[]>([]);
+  const loadedRef    = useRef(0);
+  const [pct, setPct]       = useState(0);
+  const [ready, setReady]   = useState(false);
   const [active, setActive] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -26,13 +27,14 @@ export default function HeroScroll() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Canvas setup — size once, never inside draw
+  // Canvas size + native scroll handler
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Size canvas once — never inside draw
     const setSize = () => {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -49,15 +51,21 @@ export default function HeroScroll() {
       ctx.drawImage(img, cx, cy, img.naturalWidth * r, img.naturalHeight * r);
     };
 
-    // RAF-throttled scroll handler
-    let rafId = 0, nextFrame = 1;
-    const flush = () => { rafId = 0; draw(imgsRef.current[nextFrame]); };
+    // RAF throttle — max once per screen refresh
+    let rafId = 0;
+    let nextFrame = 1;
+
+    const flush = () => {
+      rafId = 0;
+      draw(imgsRef.current[nextFrame]);
+    };
 
     const onScroll = () => {
       const hero = document.getElementById("hero");
       if (!hero) return;
       const scrollable = hero.offsetHeight - window.innerHeight;
-      const progress   = Math.min(Math.max(window.scrollY / scrollable, 0), 1);
+      if (scrollable <= 0) return;
+      const progress  = Math.min(Math.max(window.scrollY / scrollable, 0), 1);
       nextFrame = Math.min(Math.max(Math.round(progress * (TOTAL - 1)) + 1, 1), TOTAL);
       setActive(nextFrame <= 75 ? 0 : nextFrame <= 150 ? 1 : nextFrame <= 225 ? 2 : 3);
       if (!rafId) rafId = requestAnimationFrame(flush);
@@ -65,6 +73,7 @@ export default function HeroScroll() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", setSize);
+
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", setSize);
@@ -77,18 +86,22 @@ export default function HeroScroll() {
     const canvas = canvasRef.current;
     const ctx    = canvas?.getContext("2d");
 
-    const onLoad = () => {
+    const onLoad = (i: number) => {
       loadedRef.current += 1;
-      const p = Math.round((loadedRef.current / TOTAL) * 100);
-      setPct(p);
+      setPct(Math.round((loadedRef.current / TOTAL) * 100));
 
-      // Paint frame 1 the moment it arrives — kills blank screen
-      if (loadedRef.current === 1 && canvas && ctx) {
+      // Paint frame 1 instantly the moment it loads
+      if (i === 1 && canvas && ctx) {
         const img = imgsRef.current[1];
         if (img?.complete && img.naturalWidth) {
           const cw = canvas.width, ch = canvas.height;
           const r  = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-          ctx.drawImage(img, (cw - img.naturalWidth * r) / 2, (ch - img.naturalHeight * r) / 2, img.naturalWidth * r, img.naturalHeight * r);
+          ctx.drawImage(img,
+            (cw - img.naturalWidth * r) / 2,
+            (ch - img.naturalHeight * r) / 2,
+            img.naturalWidth * r,
+            img.naturalHeight * r
+          );
           setReady(true);
         }
       }
@@ -97,35 +110,30 @@ export default function HeroScroll() {
     const loadImg = (i: number) => {
       const img = new window.Image();
       img.src = `/sequence-1/ezgif-frame-${String(i).padStart(3, "0")}.jpg`;
-      img.onload = img.onerror = onLoad;
+      img.onload = () => onLoad(i);
+      img.onerror = () => onLoad(i);
       imgsRef.current[i] = img;
     };
 
-    // Load frame 1 immediately alone — then batch the rest
     loadImg(1);
-    // Frames 2–50 right after
     for (let i = 2; i <= 50; i++) loadImg(i);
-    // Rest after 1 second
     const t = setTimeout(() => {
       for (let i = 51; i <= TOTAL; i++) loadImg(i);
     }, 1000);
     return () => clearTimeout(t);
   }, []);
 
-  const heroHeight  = isMobile ? "600vh" : "1200vh";
-  const overlayPad  = isMobile ? "0 1.5rem 3rem" : "0 5rem 5rem";
-  const showLoader  = pct < 100;
+  const heroHeight = isMobile ? "600vh" : "1200vh";
+  const overlayPad = isMobile ? "0 1.5rem 3rem" : "0 5rem 5rem";
 
   return (
     <>
       <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
-      {/* Loading screen — hides once all 300 frames loaded */}
-      {showLoader && (
+      {pct < 100 && (
         <div style={{
           position: "fixed", inset: 0, background: "#0c0c0c", zIndex: 1000,
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-          // Fade out once first frame is ready
           opacity: ready ? 0 : 1,
           transition: ready ? "opacity 0.8s ease" : "none",
           pointerEvents: ready ? "none" : "all",
