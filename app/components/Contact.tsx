@@ -21,7 +21,7 @@ export default function Contact() {
         fontSize: "1.05rem", color: "rgba(13,27,42,0.7)",
         fontWeight: 300, maxWidth: 500, margin: "0 auto 3rem",
         lineHeight: 1.75,
-      }}>Book your free 30-minute consultation today. No obligations, just honest guidance.</p>
+      }}>Book your free 30-minute consultation with New Zealand's leading education consultancy. Expert student visa assistance and university placement guidance — no obligations, just honest advice.</p>
       <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
         <a href="mailto:hello@beyondbordersnz.co.nz" style={{
           display: "inline-block", fontSize: "0.72rem",

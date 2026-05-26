@@ -1,8 +1,8 @@
 "use client";
 const services = [
-  { icon: "🎓", title: "University Placement", desc: "Personalised matching to NZ universities based on your academic profile, budget, and career goals." },
-  { icon: "📋", title: "Visa Consultation", desc: "Expert guidance through New Zealand student visa applications with a 98% success rate." },
-  { icon: "📖", title: "English Proficiency Prep", desc: "IELTS and PTE coaching with tailored study plans and mock tests to meet university entry requirements." },
+  { icon: "🎓", title: "University Placement", desc: "Personalised matching to top New Zealand universities based on your academic profile, budget, and career goals. We help international students find the right NZ university." },
+  { icon: "📋", title: "Student Visa Consultation", desc: "Expert guidance through New Zealand student visa applications with a 98% visa success rate. We handle the paperwork so you can focus on your future." },
+  { icon: "📖", title: "English Proficiency Prep", desc: "IELTS and PTE coaching with tailored study plans and mock tests to meet New Zealand university entry requirements for international students." },
 ];
 export default function ServicesGrid() {
   return (
