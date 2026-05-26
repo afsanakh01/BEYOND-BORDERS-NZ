@@ -34,4 +34,12 @@ export default function About() {
               Beyond Borders NZ is New Zealand's leading education consultancy, specialising in helping international students secure placements at top New Zealand universities. Our certified counsellors provide expert student visa assistance and university application support, guiding hundreds of students through every step of the process.
             </p>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(0.9rem,2vw,1rem)", fontWeight: 300, lineHeight: 1.85, color: "rgba(250,250,248,0.6)", marginBottom: "2.5rem" }}>
-              We believe every student deserves personalised guidance to study in New Zealand. Beyond Border
+              We believe every student deserves personalised guidance to study in New Zealand. Beyond Borders. Beyond Limits.
+            </p>
+            <a href="/team" style={{ display: "inline-block", fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "#0c0c0c", background: "#C8A96E", padding: "0.8rem 2rem", textDecoration: "none", fontFamily: "'Inter', sans-serif", border: "1px solid #C8A96E" }}>Meet Our Team →</a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
