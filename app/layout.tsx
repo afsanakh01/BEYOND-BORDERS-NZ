@@ -1,3 +1,18 @@
+import type { Metadata } from "next";
+import { Cormorant_Garamond, Outfit } from "next/font/google";
+import "./globals.css";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  variable: "--font-cormorant",
+});
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-outfit",
+});
+
 export const metadata: Metadata = {
   title: "Beyond Borders NZ | New Zealand's Premier Education Consultancy",
   description: "Beyond Borders NZ is New Zealand's premier education consultancy helping international students gain admission to top NZ universities with 98% visa success rate. Expert counselling, university placement, and student visa assistance.",
@@ -19,3 +34,13 @@ export const metadata: Metadata = {
     canonical: "https://www.beyondbordersnz.com",
   },
 };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${cormorant.variable} ${outfit.variable} scroll-smooth`}>
+      <body className="antialiased">
+        {children}
+      </body>
+    </html>
+  );
+}
